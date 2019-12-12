@@ -14,20 +14,15 @@ import tensorflow as tf
 model = Sequential()
 model.add(TimeDistributed(Conv2D(64, (3, 3)), input_shape=(16, 40, 40, 3)))
 model.add(TimeDistributed(Conv2D(128, (3, 3))))
-
 model.add(TimeDistributed(Conv2D(256, (3, 3))))
 model.add(TimeDistributed(Conv2D(256, (3, 3))))
-
 model.add(TimeDistributed(Conv2D(128, (3, 3))))
 model.add(TimeDistributed(Conv2D(1, (1, 1))))
-
 model.add(TimeDistributed(Flatten()))
 model.add(GRU(800,return_sequences=True))
 model.add(GRU(800,return_sequences=True))
-
 model.add(TimeDistributed(Dense(400)))
 model.add(TimeDistributed(Dense(400)))
-
 model.add(TimeDistributed(Reshape((20, 20, 1))))
 model.add(TimeDistributed(Conv2DTranspose(1, (2, 2), strides=2)))
 model.add(Activation('sigmoid'))

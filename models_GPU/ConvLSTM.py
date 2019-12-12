@@ -16,7 +16,6 @@ X = np.load('../data/X_5_40_16_4096.npy')
 Y = np.load('../data/Y_5_40_16_4096.npy')
 Y = np.reshape(Y, (4096, 16, 40, 40, 1))
 Y = np.where(Y > 1, 1, 0)
-
 X = tf.cast(X, tf.float32)
 Y = tf.cast(Y, tf.float32)
 
@@ -29,18 +28,15 @@ model.add(TimeDistributed(Conv2D(256, (3, 3), padding='same')))
 model.add(TimeDistributed(Conv2D(256, (3, 3), padding='same')))
 model.add(TimeDistributed(Conv2D(128, (3, 3), padding='same')))
 model.add(TimeDistributed(Conv2D(40, (3, 3), padding='same')))
-
 model.add(ConvLSTM2D(40, (3, 3), padding='same', return_sequences=True))
 model.add(BatchNormalization())
-
 model.add(ConvLSTM2D(40, (3, 3), padding='same', return_sequences=True))
 model.add(BatchNormalization())
-
 model.add(ConvLSTM2D(40, (3, 3), padding='same', return_sequences=True))
 model.add(BatchNormalization())
-
 model.add(Conv3D(1, (3, 3, 3), activation='sigmoid', padding='same', data_format='channels_last'))
 model.compile(loss='binary_crossentropy', optimizer='RMSprop')
+
 #model.summary()
 #model.fit(X, Y, batch_size=16, epochs=100, validation_split=0.1, 
 #        callbacks=[EarlyStopping(restore_best_weights=True, monitor='val_loss', patience=30)])

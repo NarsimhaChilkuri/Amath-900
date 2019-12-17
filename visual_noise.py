@@ -25,16 +25,15 @@ patch = visual.GratingStim(win, tex=noiseTexture,
 #patch = visual.NoiseStim(win, mask='circle', units='pix', pos=(0.0, 0.0), size=(128, 128), noiseType="binary", noiseElementSize=32, interpolate=True, blendmode='avg')
 
 while not event.getKeys():
-    # increment by (1, 0.5) pixels per frame:
     patch.phase += (-1 / 300.0, 0)
     patch.pos += (0, -1)
     patch.draw()
     win.flip()
-    #win.getMovieFrame()
+    win.getMovieFrame() 
 
 
 win.close()
-#win.saveMovieFrames('0.png')
+win.saveMovieFrames('0.png') # use win.saveMovieFrames('name.gif') to save it as a gif
 core.quit()
 
 # The contents of this file are in the public domain.

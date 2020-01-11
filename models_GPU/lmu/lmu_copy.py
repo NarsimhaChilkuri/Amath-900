@@ -194,7 +194,9 @@ class LMUCell(Layer):
              K.dot(h, self.hidden_encoders) +
              K.dot(m, self.memory_encoders))
 
-        m = K.reshape(K.reshape(m, (self.input_dim, self.order)) + K.dot(K.reshape(m, (self.input_dim, self.order)), self.AT) + K.dot(K.transpose(u), self.BT), (1, self.order * self.input_dim))
+        m = K.reshape(K.reshape(m, (self.input_dim, self.order)) + 
+                      K.dot(K.reshape(m, (self.input_dim, self.order)), self.AT) + 
+                      K.dot(K.transpose(u), self.BT), (1, self.order * self.input_dim))
 
         h = self.hidden_activation(
              K.dot(inputs, self.input_kernel) +
